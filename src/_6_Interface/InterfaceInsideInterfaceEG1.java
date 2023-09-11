@@ -2,7 +2,7 @@ package Interface;
 
 //import Interface.InterfaceEG1A.*;
 
-public class InterfaceEG1 extends InterfaceEG1C implements InterfaceEG1A,InterfaceEG1D, InterfaceEG1A.InterfaceEG1E {
+public class InterfaceInsideInterfaceEG1 extends InterfaceEG1C implements InterfaceEG1A,InterfaceEG1D, InterfaceEG1A.InterfaceInsideInterface {
 	int i=3;                                       //  if not defined hear giving error "The field obj.i is ambiguous"
 	public void fun1() {
 		System.out.println("fun1 of InterfaceEG1");
@@ -11,7 +11,7 @@ public class InterfaceEG1 extends InterfaceEG1C implements InterfaceEG1A,Interfa
 		InterfaceEG1A.InterfaceEG1B objB = new InterfaceEG1A.InterfaceEG1B();
 		objB.fun1();
 		//InterfaceEG1A.InterfaceEG1B.fun1();
-		InterfaceEG1 obj= new InterfaceEG1();
+		InterfaceInsideInterfaceEG1 obj= new InterfaceInsideInterfaceEG1();
 		//obj.i =2;                                //The final field InterfaceEG1A.i cannot be assigned
 		System.out.println("i = "+obj.i);
 		//InterfaceEG1A.j=2;                       //The final field InterfaceEG1A.j cannot be assigned
@@ -19,10 +19,10 @@ public class InterfaceEG1 extends InterfaceEG1C implements InterfaceEG1A,Interfa
 		System.out.println("K = "+obj.getK());
 		System.out.println("j = "+InterfaceEG1A.j);
 		
-		InterfaceEG1A objA = new InterfaceEG1();
+		InterfaceEG1A objA = new InterfaceInsideInterfaceEG1();
 		System.out.println("i = "+objA.i);         //value of i would be of interface because of its reference
 		
-		InterfaceEG1A.InterfaceEG1E objE = new InterfaceEG1();
+		InterfaceInsideInterface objE = new InterfaceInsideInterfaceEG1();
 		objE.fun1InterfaceEG1D();
 	}
 }
@@ -33,8 +33,8 @@ interface InterfaceEG1A {                   //I1.I2 by this way we can access ne
 	default void fun1() {
 		System.out.println("fun1 of InterfaceEG1A");
 	}
-	//public static void main(String[] args) { System.out.println("sdfhuytr"); }//interface can’t be instantiated but can be invoked if it contains a main method.
-	interface InterfaceEG1E{
+	//public static void main(String[] args) { System.out.println("sdfhuytr"); }//interface canï¿½t be instantiated but can be invoked if it contains a main method.
+	interface InterfaceInsideInterface {										// Interface Inside Interface
 		default void fun1InterfaceEG1D() {
 			System.out.print("inside InterfaceEG1A > InterfaceEG1E > fun1InterfaceEG1D()");
 		} 
@@ -60,4 +60,16 @@ class InterfaceEG1C{
 	public int getK() {
 		return k;
 	}
+
+	interface InterfaceInsideClass{													// Interface Inside Class
+		public abstract void m1();
+	}
 }
+
+
+@FunctionalInterface
+interface Aaa{ public abstract void fun1(); }
+@FunctionalInterface
+interface Bbb extends Aaa{}									// functional interface can't extends another functional interface else there
+															// no abs fun() should be present
+interface Ccc extends Aaa{public abstract void fun2();}		// normal interface can extends another functional interface with its own fun()

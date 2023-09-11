@@ -4,6 +4,9 @@ import java.text.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StringEG1 {
 	
@@ -63,7 +66,10 @@ public class StringEG1 {
 			//...................String to integer...................
 //			int ii = Integer.valueOf("64"); System.out.println(ii);
 //			int ij = Integer.parseInt("647"); System.out.println(ij);
-			
+
+			//...................integer to String...................
+
+
 			//...................Check Whether the String Consists of Special Characters...................
 			//if (!Character.isDigit(s.charAt(i)) && !Character.isLetter(s.charAt(i)) && !Character.isWhitespace(s.charAt(i)))
 			//System.out.println("sdfg%ytr".contains("%"));

@@ -1,4 +1,4 @@
-package Polymorphism;
+package _4_Polymorphism;
 
 public class PolymorphismEG1 extends PolymorphismEG1A{	
 	PolymorphismEG1A method1() {                  // covarient return type = method overriding by changing return type

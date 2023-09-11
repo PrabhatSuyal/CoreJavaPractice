@@ -1,4 +1,4 @@
-package Abstract;
+package _5_Abstract;
 
 public class AbstractEG1 {
 	//abstract int j=2;           //Illegal modifier for the field j; only public, protected, private, static, final, transient & volatile are permitted

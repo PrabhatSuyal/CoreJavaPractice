@@ -1,10 +1,6 @@
 package Multithreading;
 
-import java.security.PublicKey;
-
-import MathEG.Count_nums_not_7;
-
-public class ThreadingEG1 {
+public class CustomThread {
 	
 	public static int count = 0;
 
@@ -44,7 +40,7 @@ public class ThreadingEG1 {
 class CustomThreadRun1 implements Runnable {
 	public void run() {
 //		System.out.println("thread is running......");
-		ThreadingEG1.fun1(this.name);
+		CustomThread.fun1(this.name);
 		System.out.println(volVar++);
 	}
 	String name;
@@ -59,7 +55,7 @@ class CustomThread11 extends Thread{
 	}
 	@Override
 	public void run() {
-		ThreadingEG1.fun1(this.getName());
+		CustomThread.fun1(this.getName());
 	}
 	
 }

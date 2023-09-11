@@ -2,6 +2,8 @@ package StreamAPI;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class StreamAPIEG1 {
@@ -27,7 +29,7 @@ public class StreamAPIEG1 {
 //		builder.add("abc").build();
 
 
-        //iterate over stream with indices
+        //iterate over stream with indices/index
 //		IntStream.range(0, list.size()).mapToObj(index -> String.format("%d --> %s", index, list.get(index))).forEach(System.out::println);
 //		list.stream().peek(System.out::println).count(); //The reason peek() didn't work in our first example is that it's an intermediate operation and we didn't apply a terminal operation to the pipeline. This method exists mainly to support debugging, where you want to see the elements as they flow past a certain point in a pipeline
 
@@ -41,11 +43,15 @@ public class StreamAPIEG1 {
 
 
 
-        //manipulate the Stream
+        //Find first or last element of Stream
 //		Stream<String> stream  = Stream.of("Geek_First", "Geek_2", "Geek_3", "Geek_4", "Geek_Last");
-//		System.out.println("first element of stream is : "+stream.findFirst());
-//		System.out.println("last element of stream is : "+stream.sorted(Collections.reverseOrder()).findFirst());	// can also use Comparator.reverseOrder()
+//		System.out.println("first element of stream is : "+stream.findFirst());                                     // way 1
+//		System.out.println("last element of stream is : "+stream.sorted(Collections.reverseOrder()).findFirst());	// way 2 can also use Comparator.reverseOrder()
+//      System.out.println("First element of list : "+list.stream().reduce((a,b) -> a).get().getName());            // way 3
+//      System.out.println("Last element of list : "+list.stream().reduce((a,b) -> b).get().getName());             // way 1
 
+
+        //manipulate the stream
 
 
         //print only duplicate elements
@@ -53,7 +59,14 @@ public class StreamAPIEG1 {
 //		System.out.println(stream2.filter(a -> !set.add(a)).collect(Collectors.toSet()));	//Set.add() returns false if element already presents, so in that case only we have to add it to set
 //		List<Integer> list = Arrays.asList(5, 13, 4, 21, 13, 27, 2, 59, 59, 34);
 //		list.stream().filter(a -> Collections.frequency(list, a)>1).collect(Collectors.toSet()).forEach(System.out::println);
-
+/*        System.out.println("duplicate elements using Collectors.groupingBy() : "+list.stream()
+                .collect(Collectors
+                        .groupingBy(StreamAPIEG1A::getPrice,Collectors.toList()))           // group the elements to list by their common price
+                .entrySet().stream()
+                .filter(a -> a.getValue().size()>1)                                         // filtering that list having multiple obj with common price
+                .map(a -> a.getValue().size())                                              // mapping their count
+                .collect(Collectors.toList()));                                             // printing their count
+*/
 
 
         //count the occurrence of char in string
@@ -61,8 +74,32 @@ public class StreamAPIEG1 {
 //		System.out.println("the occurrence of char in string is : "+string.chars().filter(a -> a==ch).count());;
 
 
+        // ............................................8. Java Stream Example: Find Max and Min Product Price
+        /*
+         * The maximum value is returned as an Optional<T>, where T is the type of the elements in the stream.
+         * If the stream is empty, the Optional will be empty as well.
+         * */
+//		StreamAPIEG1A max = list.stream().max( (a,b) -> a.getPrice()>b.getPrice() ? 1 : -1 ).get();     //get() is the fun() inside Optional<T> which returns T
+//		System.out.println("max in list using stream > max > get "+max.getName());
+//
+//
+//		StreamAPIEG1A min = list.stream().min( (a,b) -> a.getPrice()>b.getPrice() ? 1 : -1 ).get();		// way 1
+//		System.out.println("min in list using stream > min > get "+min.getName());
+        //Optional<StreamAPIEG1A> min = list.stream().sorted(new Comparator<StreamAPIEG1A>() { public int compare(StreamAPIEG1A a, StreamAPIEG1A b) { return a.getPrice() > b.getPrice() ? 1 : -1;    }}).findFirst();
+        //Optional<StreamAPIEG1A> min = list.stream().sorted((a,b)->a.getPrice()>b.getPrice() ? 1:-1).findFirst();
+        //Optional<StreamAPIEG1A> min = list.stream().sorted(Comparator.comparing(StreamAPIEG1A::getPrice)).findFirst();  //Comparator.comparing() will return obj of Comparator
+        //System.out.println(min.get().getName());
+
+
         //Third largest element
         //System.out.println(list.stream().distinct().sorted().skip(list.stream().distinct().toArray().length - 3).findFirst().orElseThrow(() -> new IllegalAccessError("Array has less than 3 distinct elements.")));
+
+
+
+        // merge arrays
+//        Stream a = Stream.of(3,2,5,23,4,6);
+//        Stream b = Stream.of(3,2,5,23,4,6);
+//        Stream.concat(a,b).toArray();
 
 //...............................................3.  Creating Stream object from Arrays
         /*
@@ -102,25 +139,9 @@ public class StreamAPIEG1 {
 		// ............................................7. Sum by using Collectors Methods
 //		double sum = list.stream().collect(Collectors.summingDouble( p -> p.getPrice() ));
 //		System.out.println("sum of all price using stream > collect > summingDouble : "+sum);
-		
-		
-		
-		
-		// ............................................8. Java Stream Example: Find Max and Min Product Price
-		/*
-		 * The maximum value is returned as an Optional<T>, where T is the type of the elements in the stream. 
-		 * If the stream is empty, the Optional will be empty as well.
-		 * */
-//		StreamAPIEG1A max = list.stream().max( (a,b) -> a.getPrice()>b.getPrice() ? 1 : -1 ).get();
-//		System.out.println("max in list using stream > max > get "+max.getName());
-//		
-//		
-//		StreamAPIEG1A min = list.stream().min( (a,b) -> a.getPrice()>b.getPrice() ? 1 : -1 ).get();		// way 1
-//		System.out.println("min in list using stream > min > get "+min.getName());
-//		Optional<StreamAPIEG1A> min = list.stream().sorted(Comparator.comparing(StreamAPIEG1A::getPrice)).findFirst();
-//		System.out.println(min);
-		
-		
+//      IntStream.of(2,4,3,1).sum();
+
+
 		
 		// ............................................9. Java Stream Example: Convert List into Set
 //		list.stream().collect(Collectors.toSet()).forEach(System.out::println);//map(a -> a.getPrice()).collect(Collectors.toSet()).forEach( System.out::println ); //make set of a parameter
@@ -131,7 +152,8 @@ public class StreamAPIEG1 {
 		// ............................................10. Java Stream Example: Convert List into Map
 //		list.stream().distinct().collect(Collectors.toMap( a -> a.getPrice() , a -> a)).entrySet().forEach(a -> System.out.println("key : "+a.getKey()+" value : "+a.getValue().getName()) );
 		/*we used distinct() above otherwise it was giving error "java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)" as there are multiple elements with same price*/
-		
+
+        //............................................11. group by function
 		
 		
 		

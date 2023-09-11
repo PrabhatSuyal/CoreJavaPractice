@@ -2,7 +2,7 @@ package Multithreading;
 
 import java.util.concurrent.TimeUnit;
 
-public class ThreadEG2 {
+public class SynchronizedMethod {
 
 	public static void main(String[] args) {
 		CustomThread1 thread1 = new CustomThread1();
