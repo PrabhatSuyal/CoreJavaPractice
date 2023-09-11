@@ -1,6 +1,6 @@
-package Interface;
+package _6_Interface;
 
-import Interface.A.AA;
+import _6_Interface.A.AA;
 
 interface A {	
 	 void m1(A a);	
@@ -20,18 +20,21 @@ abstract class B implements A.AA {
 }
 
 public class Test extends B {
- public void m1(A a){
- System.out.println("Two");
-}
- void m1(B b){
-	System.out.println("Three");
-}
-public static void main(String[] args){
- A.AA a = new Test();
- a.m1(a); 
- a.funAA();//  
- }
-public void m1(AA a) {
-	System.out.println("AA");	
-}
+    public void m1(A a) {
+        System.out.println("Two");
+    }
+
+    void m1(B b) {
+        System.out.println("Three");
+    }
+
+    public static void main(String[] args) {
+        A.AA a = new Test();
+        a.m1(a);
+        a.funAA();//
+    }
+
+    public void m1(AA a) {
+        System.out.println("AA");
+    }
 }
